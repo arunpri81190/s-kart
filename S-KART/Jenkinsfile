@@ -1,0 +1,17 @@
+pipeline {
+	agent any
+	stages {
+		stage('Checkout') {
+			steps {
+				git branch: 'main',
+				    url: 'https://github.com/arunpri81190/S-KART.git',
+				    credentialsId: 'github-token'
+				}
+			}
+		stage('Build') {
+			steps {
+				echo "Jenkins has pulled repo files"
+			}
+		}
+	}
+}
