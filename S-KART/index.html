@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S-KART | Smart Shopping</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">S-KART</div>
+    <nav class="nav">
+      <a href="#fruits">Fruits</a>
+      <a href="#grocery">Grocery</a>
+      <a href="#electronics">Electronics</a>
+      <a href="#sports">Sports</a>
+      <a href="#mobiles">Mobiles</a>
+      <a href="#checkout" class="checkout-link">Checkout</a>
+    </nav>
+    <div class="top-actions">
+      <button class="btn ghost compact" id="employeeLoginBtn">Employee Login</button>
+      <button class="btn primary compact" id="adminLoginBtn">Admin Login</button>
+      <div class="session-badges">
+        <span class="badge" id="employeeBadge" hidden></span>
+        <span class="badge admin" id="adminBadge" hidden></span>
+      </div>
+      <button class="cart-chip" id="cartChip">Cart · <span id="cartCount">0</span></button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Everything you need, in one cart</p>
+      <h1>Welcome to S-KART</h1>
+      <p class="subhead">Browse curated picks across fruits, groceries, electronics, sports, and mobiles. Add items to your cart or buy instantly.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#grocery">Start shopping</a>
+        <a class="btn ghost" href="#checkout">Go to checkout</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>Quick Cart</h3>
+      <p>Items: <span id="heroCartCount">0</span></p>
+      <p>Total: ₹<span id="heroCartTotal">0.00</span></p>
+      <a class="btn small" href="#checkout">Review cart</a>
+    </div>
+  </section>
+
+  <main class="content">
+    <section class="category" id="fruits">
+      <div class="category-head">
+        <h2>Fruits</h2>
+        <p>Fresh picks with average market prices.</p>
+      </div>
+      <div class="grid" id="fruitsGrid"></div>
+    </section>
+
+    <section class="category" id="grocery">
+      <div class="category-head">
+        <h2>Grocery</h2>
+        <p>Everyday essentials at fair prices.</p>
+      </div>
+      <div class="grid" id="groceryGrid"></div>
+    </section>
+
+    <section class="category" id="electronics">
+      <div class="category-head">
+        <h2>Electronics</h2>
+        <p>Reliable tech with averaged street prices.</p>
+      </div>
+      <div class="grid" id="electronicsGrid"></div>
+    </section>
+
+    <section class="category" id="sports">
+      <div class="category-head">
+        <h2>Sports</h2>
+        <p>Gear up for your next game.</p>
+      </div>
+      <div class="grid" id="sportsGrid"></div>
+    </section>
+
+    <section class="category" id="mobiles">
+      <div class="category-head">
+        <h2>Mobiles</h2>
+        <p>Popular 5G-ready phones with average prices.</p>
+      </div>
+      <div class="grid" id="mobilesGrid"></div>
+    </section>
+  </main>
+
+  <section class="checkout" id="checkout">
+    <div class="checkout-head">
+      <h2>Checkout</h2>
+      <p>Review selected items and place your order.</p>
+    </div>
+    <div class="checkout-content">
+      <div class="checkout-list" id="checkoutList"></div>
+      <div class="checkout-summary">
+        <div class="summary-row">
+          <span>Items</span>
+          <span id="summaryCount">0</span>
+        </div>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>₹<span id="summarySubtotal">0.00</span></span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span>₹<span id="summaryTotal">0.00</span></span>
+        </div>
+        <button class="btn primary full" id="placeOrderBtn">Place order</button>
+        <p class="mini-note">Buy Now buttons add the item and bring you here automatically.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Built for you by S-KART · Demo storefront with averaged INR prices.</p>
+  </footer>
+
+  <div class="toast" id="toast">Item added to cart</div>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden></div>
+
+  <div class="modal" id="adminModal" hidden>
+    <div class="modal-head">
+      <h3>Admin Login</h3>
+      <button class="close-btn" data-close-modal>✕</button>
+    </div>
+    <div class="modal-body">
+      <label class="field">
+        <span>Username</span>
+        <input type="text" id="adminUser" placeholder="Admin">
+      </label>
+      <label class="field">
+        <span>Password</span>
+        <input type="password" id="adminPass" placeholder="3511">
+      </label>
+      <p class="error" id="adminError" hidden>Invalid credentials</p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn ghost" data-close-modal>Cancel</button>
+      <button class="btn primary" id="adminSubmit">Login</button>
+    </div>
+  </div>
+
+  <div class="modal" id="employeeModal" hidden>
+    <div class="modal-head">
+      <h3>Employee Login</h3>
+      <button class="close-btn" data-close-modal>✕</button>
+    </div>
+    <div class="modal-body">
+      <label class="field">
+        <span>User</span>
+        <select id="employeeUser">
+          <option value="Arun">Arun</option>
+          <option value="Priya">Priya</option>
+          <option value="Mohammed">Mohammed</option>
+          <option value="Chris">Chris</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>Token</span>
+        <input type="password" id="employeeToken" placeholder="4632">
+      </label>
+      <label class="field">
+        <span>Password</span>
+        <input type="password" id="employeePass" placeholder="••••">
+      </label>
+      <p class="error" id="employeeError" hidden>Invalid token or password</p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn ghost" data-close-modal>Cancel</button>
+      <button class="btn primary" id="employeeSubmit">Login</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
